@@ -1,11 +1,20 @@
+import { useState } from "react";
 import { useCanvas } from "./useCanvas";
 import "./App.css";
 
 function App() {
   const [coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight] = useCanvas();
+  const [timer, setTimer] = useState(null);
 
   const handleCanvasClick = (event) => {
-    setCoordinates({ x: event.clientX, y: event.clientY });
+    let y = event.clientY;
+    clearInterval(timer);
+    setTimer(
+      setInterval(() => {
+        setCoordinates({ x: event.clientX, y });
+        y += 2;
+      }, 100)
+    );
   };
 
   const handleClearCanvas = (event) => {
