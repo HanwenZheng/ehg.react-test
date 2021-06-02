@@ -17,7 +17,12 @@ function App() {
     );
   };
 
+  const handleStopCanvas = (event) => {
+    clearInterval(timer);
+  };
+
   const handleClearCanvas = (event) => {
+    clearInterval(timer);
     setCoordinates({});
   };
 
@@ -33,10 +38,14 @@ function App() {
           style={{ outline: Object.keys(coordinates).length === 0 ? "1px solid pink" : "" }}
         />
       </div>
-
-      <button className="btn" onClick={handleClearCanvas}>
-        CLEAR
-      </button>
+      <div className="btns">
+        <button className="btn" onClick={handleStopCanvas}>
+          Capture the Moment
+        </button>
+        <button className="btn" onClick={handleClearCanvas}>
+          Clear
+        </button>
+      </div>
     </div>
   );
 }

@@ -6,7 +6,6 @@ export const canvasHeight = 128;
 
 // Get an 32-step rgb color array sorted by hue
 const getSortedRGBs = () => {
-  console.log("sort");
   // Array of 32768 rgb colors (32*32*32)
   let colors = [];
   for (let r = 8; r <= 256; r += 8) {
