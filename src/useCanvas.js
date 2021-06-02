@@ -6,6 +6,7 @@ export const canvasHeight = 128;
 
 // Get an 32-step rgb color array sorted by hue
 const getSortedRGBs = () => {
+  console.log("sort");
   // Array of 32768 rgb colors (32*32*32)
   let colors = [];
   for (let r = 8; r <= 256; r += 8) {
@@ -68,18 +69,25 @@ const rgbToHsl = (rgb) => {
 
 // Paint color array to canvas
 const draw = (ctx, colors, location) => {
+  console.log("draw");
   // console.log(colors);
   colors.forEach((color, index) => {
     const { r, g, b } = color;
     ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-    ctx.fillRect((Math.floor(index / canvasHeight) + location.x) % canvasWidth, index % canvasHeight, 1, 1);
+    ctx.fillRect(
+      (Math.floor(index / canvasHeight) + location.x) % canvasWidth,
+      (index + location.y) % canvasHeight,
+      1,
+      1
+    );
   });
 };
+
+let colors = getSortedRGBs();
 
 export const useCanvas = () => {
   const canvasRef = useRef(null);
   const [coordinates, setCoordinates] = useState([]);
-  let colors = getSortedRGBs();
 
   useEffect(() => {
     const canvasObj = canvasRef.current;
